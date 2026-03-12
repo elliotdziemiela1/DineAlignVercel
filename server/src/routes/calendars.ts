@@ -115,7 +115,7 @@ const calendarsRouter = (router:Router) => {
                 // Update all calendar attributes slated in updates
                 Object.keys(updates).forEach((key) => {
                     if(key in calendar && updates[key] !== undefined) {
-                        calendar[key] = updates[key]; // ignore error
+                        (calendar as any)[key] = updates[key];
                     }
                 });
 

@@ -1,7 +1,7 @@
 /*
  * Connect all of your endpoints together here.
  */
-import express, { Application, Router } from 'express';
+import { Application, Router } from 'express';
 import usersRouter from './users'; // Import the users router
 import calendarsRouter from './calendars'; // Import the calendars router
 

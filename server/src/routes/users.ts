@@ -145,7 +145,7 @@ const usersRouter = (router:Router) => {
                 // Update all user attributes slated in updates
                 Object.keys(updates).forEach((key) => {
                     if(key in user && updates[key] !== undefined) {
-                        user[key] = updates[key]; // ignore error
+                        (user as any)[key] = updates[key];
                     }
 
                 });
