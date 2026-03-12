@@ -1,7 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
-import { User } from "../Profile/Profile";
-import { fetchAllCalendars, fetchAllUsers } from "../../services/fetchData";
+import { useState, useEffect } from "react";
+import { fetchAllCalendars} from "../../services/fetchData";
 import styles from "./SearchDiets.module.scss"
 import dietIconImg from "./dietIcon.png"
 import { CalendarDetails } from "../Calendar/Calendar";

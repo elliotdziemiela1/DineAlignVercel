@@ -79,7 +79,7 @@ export default function Home() {
         loading: true,
         feed: [],
     });
-    const [display, setDisplay] = useState<MenuDisplay>(MenuDisplay.TRENDING);
+    const [display] = useState<MenuDisplay>(MenuDisplay.TRENDING);
 
     console.log("Home:", userDetails);
 

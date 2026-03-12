@@ -66,7 +66,7 @@ export function DetailedDay({ isOpen, details, setDetails }: {isOpen: boolean, d
                                 <h3>{mealEntry.name}</h3>
                                 <p>{`Time of day: ${mealEntry.time}`}</p>
                                 {!!mealEntry.description && <p>{mealEntry.description}</p>}
-                                {!!mealEntry.link && <a href={mealEntry.link}  target="_blank">Source</a>}
+                                {!!mealEntry.link && <a href={mealEntry.link}  target="_blank" rel="noreferrer">Source</a>}
                             </div>
                         )
                     })}

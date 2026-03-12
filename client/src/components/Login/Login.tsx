@@ -9,7 +9,7 @@ export default function Login() {
     async function login(username:string, email: string, password: string, isLogin: boolean) {
         const result = await (isLogin ? signIn(email, password) : signUp(username, email, password));
         if (result.success) {
-            setIsLoading(false);
+            // setIsLoading(false);
             setSuccess(true);
         } else {
             setError(result.error as {code: string, message: string});
@@ -19,7 +19,7 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<{code: string, message: string}>({code: "", message: ""});
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [username, setUsername] = useState("")
 
@@ -51,12 +51,12 @@ export default function Login() {
                     <div className={style.buttonContainer}>
                         <button className={style.signInButton} type="button" onClick={(evt) => {
                             evt.preventDefault();
-                            setIsLoading(true);
+                            // setIsLoading(true);
                             login(username, email, password, true);
                         }}>Login</button>
                         <button className={style.signInButton} type="button" onClick={(evt) => {
                             evt.preventDefault();
-                            setIsLoading(true);
+                            // setIsLoading(true);
                             login(username, email, password, false);
                         }}>Sign Up</button>
                     </div>

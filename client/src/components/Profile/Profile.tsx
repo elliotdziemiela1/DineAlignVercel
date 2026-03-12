@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import style from "./Profile.module.css"
-import defaultPfp from "./DefaultPFP.jpg"
 import Calendar from "../Calendar/Calendar"
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../..";

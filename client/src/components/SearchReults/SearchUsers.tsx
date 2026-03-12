@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { User } from "../Profile/Profile";
 import { fetchAllUsers } from "../../services/fetchData";
 import defaultPfp from "../Profile/DefaultPFP.jpg"
