@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express"
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 var bodyParser = require('body-parser');
 var router = express.Router();
@@ -49,19 +50,18 @@ async function startServer() {
 //   res.json({message: "Hello API!"})
 // })
 
-var allowCrossDomain = function (req:Request, res:Response, next:any) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-  next();
-};
-app.use(allowCrossDomain);
-
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
 app.use(bodyParser.json());
+
+app.use(cors({
+  origin: 'https://dine-align-vercel.vercel.app',
+  credentials: false,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
 
 app.use(express.static(path.join(__dirname, '../clientbuild')));
 
