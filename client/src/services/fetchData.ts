@@ -1,11 +1,11 @@
 import { CalendarDetails, Privacy } from "../components/Calendar/Calendar";
 import { DietDetails, User } from "../components/Profile/Profile";
 import axios from "axios";
-import { loadBalancerDNS } from "../types";
+import { serverURL } from "../types";
 
 export async function fetchCalendar(id: string, userId?: string): Promise<CalendarDetails | null> {
     try {
-        const response = await axios.get(loadBalancerDNS + `/api/calendars/${id}`);
+        const response = await axios.get(serverURL + `/api/calendars/${id}`);
         const data : CalendarDetails | null = response.data.data;
         if (data !== null && data.privacy === Privacy.PRIVATE && (!userId || data.owner !== userId)) {
             throw Error("Calendar is private.");
@@ -27,7 +27,7 @@ export async function followCalendar(calId: string, user: User): Promise<DietDet
             const oldCalendar = await fetchCalendar(user.followsDiet.diet);
             if (oldCalendar) {
                 oldCalendar.followedBy = oldCalendar.followedBy.filter((userId) => userId !== user._id);
-                await axios.put(loadBalancerDNS + "/api/calendars/" + oldCalendar._id, oldCalendar);
+                await axios.put(serverURL + "/api/calendars/" + oldCalendar._id, oldCalendar);
             }
         }
 
@@ -37,10 +37,10 @@ export async function followCalendar(calId: string, user: User): Promise<DietDet
             daysCompleted: [],
             repeating: true
         };
-        await axios.put(loadBalancerDNS + `/api/users/${user._id}`,user);
+        await axios.put(serverURL + `/api/users/${user._id}`,user);
         
         calendar.followedBy = [...calendar.followedBy, user._id];
-        await axios.put(loadBalancerDNS + "/api/calendars/" + calId, calendar);
+        await axios.put(serverURL + "/api/calendars/" + calId, calendar);
         return user.followsDiet;
     } else {
         return undefined;
@@ -71,7 +71,7 @@ export async function addRating(calId:string, review:string, thumb:number, owner
             owner: owner._id
         }
         cal.ratings.unshift(newRating)
-        axios.put(loadBalancerDNS + `/api/calendars/${calId}`, cal)
+        axios.put(serverURL + `/api/calendars/${calId}`, cal)
     }
 }
 
@@ -84,7 +84,7 @@ function parseDates(user: User): User {
 }
 
 export async function fetchUserByID(id: string): Promise<User | null> {
-    const response = await axios.get(loadBalancerDNS + `/api/users/${id}`);
+    const response = await axios.get(serverURL + `/api/users/${id}`);
     const user: User | null = response.data.data;
 
     return user ? parseDates(user) : null;
@@ -92,7 +92,7 @@ export async function fetchUserByID(id: string): Promise<User | null> {
 
 export async function fetchPopularCalendarIDs(): Promise<string[] | null> {
     try {
-        const response = await axios.get(loadBalancerDNS + `/api/calendars`);
+        const response = await axios.get(serverURL + `/api/calendars`);
         const data = response.data.data;
         var ids = [];
         for (const calendar of data) {
@@ -105,13 +105,13 @@ export async function fetchPopularCalendarIDs(): Promise<string[] | null> {
 }   
 
 export async function fetchAllUsers(): Promise<User[] | null> {
-    const response = await axios.get(loadBalancerDNS + `/api/users`)
+    const response = await axios.get(serverURL + `/api/users`)
 
     return response.data.data
 }   
 
 export async function fetchAllCalendars(): Promise<CalendarDetails[] | null> {
-    const response = await axios.get(loadBalancerDNS + "/api/calendars");
+    const response = await axios.get(serverURL + "/api/calendars");
 
     return response.data.data
 }
